@@ -1,15 +1,6 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
-
-const generateSingleOptions = (listOfValues) => {
-    return listOfValues.map((option, key) => {
-        return (
-            <MenuItem key={key} value={key.toString()}>
-                {option.label}
-            </MenuItem>
-        );
-    });
-};
+import {formElemFormats, generateOptions } from './../Utilities';
 
 const FormInputDropdown = ({
     name,
@@ -19,14 +10,13 @@ const FormInputDropdown = ({
     required,
     listOfValues=[]
 }) => {
-
     return (
         <FormControl size={"small"} fullWidth sx={{marginTop: 2}} required={required}>
             <InputLabel>{label}</InputLabel>
             <Controller
                 render={({ field: { onChange, value } }) => (
                     <Select onChange={onChange} value={value} defaultValue={defaultValue}>
-                        {generateSingleOptions(listOfValues)}
+                        {generateOptions(listOfValues, formElemFormats.LIST)}
                     </Select>
                 )}
                 control={control}

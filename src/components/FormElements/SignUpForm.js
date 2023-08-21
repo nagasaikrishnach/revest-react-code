@@ -6,19 +6,7 @@ import CardHeader from '@mui/material/CardHeader';
 import FormInputText from "./FormInputText";
 import FormInputDropdown from "./FormInputDropdown";
 import FormInputRadio from "./FormInputRadio";
-
-const formElemFormats = {
-    TEXT: "TEXT",
-    LIST: "LIST",
-    RADIO: "RADIO"
-};
-
-const tuneListOfValues = (listOfValues=[]) => {
-    return listOfValues?.map(li => ({
-        label: li,
-        value: li
-    }))
-};
+import { tuneListOfValues, formElemFormats } from './../Utilities';
 
 const GetFormElement = ({formElement, control}) => {
 

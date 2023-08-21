@@ -1,22 +1,6 @@
-import {
-    FormControl,
-    FormControlLabel,
-    FormLabel,
-    Radio,
-    RadioGroup,
-} from "@mui/material";
+import { FormControl, FormLabel, RadioGroup } from "@mui/material";
 import { Controller } from "react-hook-form";
-
-const generateRadioOptions = (listOfValues) => {
-    return listOfValues.map((singleOption, key) => (
-        <FormControlLabel
-            key={key}
-            value={key.toString()}
-            label={singleOption.label}
-            control={<Radio />}
-        />
-    ));
-};
+import {formElemFormats, generateOptions } from './../Utilities';
 
 const FormInputRadio= ({
     name,
@@ -39,7 +23,7 @@ const FormInputRadio= ({
                     formState,
                 }) => (
                     <RadioGroup value={value} onChange={onChange} defaultValue={defaultValue} row>
-                        {generateRadioOptions(listOfValues)}
+                        {generateOptions(listOfValues, formElemFormats.RADIO)}
                     </RadioGroup>
                 )}
             />
