@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
@@ -15,8 +15,8 @@ const SignUpForm = ({formElements=[]}) => {
 
     const onSubmit = (data) => {
         console.log(data)
-        setOpen(true);
         reset();
+        setOpen(true);
     }
 
     return (
