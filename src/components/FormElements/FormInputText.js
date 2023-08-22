@@ -6,10 +6,11 @@ const FormInputText = ({ name, control, label, defaultValue, minLength, maxLengt
         <Controller
             name={name}
             control={control}
+            defaultValue={defaultValue}
+            rules={ required ? { required: `${label} field is required` }: {}}
             render={({
                 field: { onChange, value },
                 fieldState: { error },
-                formState,
             }) => (
                 <TextField
                     sx={{marginTop: 2}}
@@ -17,13 +18,11 @@ const FormInputText = ({ name, control, label, defaultValue, minLength, maxLengt
                     size="small"
                     minLength={minLength}
                     maxLength={maxLength}
-                    required={required}
                     error={!!error}
                     onChange={onChange}
                     value={value}
                     fullWidth
                     label={label}
-                    defaultValue={defaultValue}
                     variant="outlined"/>
             )}
         />

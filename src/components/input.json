@@ -5,8 +5,8 @@
             "name": "Full Name",
             "fieldType": "TEXT",
             "minLength": 1,
-            "maxLength": 100,
-            "defaultValue": "John Doe",
+            "maxLength": 20,
+            "defaultValue": "",
             "required": true
         },
         {
@@ -22,7 +22,7 @@
             "id": 3,
             "name": "Gender",
             "fieldType": "LIST",
-            "defaultValue": "1",
+            "defaultValue": "0",
             "required": true,
             "listOfValues": [
                 "Male",
@@ -37,8 +37,8 @@
             "defaultValue": "0",
             "required": false,
             "listOfValues": [
-                "React",
                 "Javascript",
+                "React",
                 "NodeJs"
             ]
         },

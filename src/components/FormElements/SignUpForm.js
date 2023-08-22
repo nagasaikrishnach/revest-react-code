@@ -1,78 +1,43 @@
+import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import FormInputText from "./FormInputText";
-import FormInputDropdown from "./FormInputDropdown";
-import FormInputRadio from "./FormInputRadio";
-import { tuneListOfValues, formElemFormats } from './../Utilities';
-
-const GetFormElement = ({formElement, control}) => {
-
-    const { name } = formElement;
-
-    switch(formElement.fieldType){
-        case formElemFormats.RADIO: {
-            const { listOfValues=[], defaultValue, required } = formElement;
-            return (
-                <FormInputRadio
-                    name={name}
-                    label={name}
-                    control={control}
-                    required={required}
-                    defaultValue={defaultValue}
-                    listOfValues={tuneListOfValues(listOfValues)}
-                />
-            )
-        }
-        case formElemFormats.LIST:{
-            const { listOfValues=[], defaultValue, required } = formElement;
-            return (
-                <FormInputDropdown
-                    name={name}
-                    label={name}
-                    control={control}
-                    required={required}
-                    defaultValue={defaultValue}
-                    listOfValues={tuneListOfValues(listOfValues)}
-                />
-            )
-        }
-        case formElemFormats.TEXT: 
-        default: {
-            const { minLength, maxLength, required, defaultValue } = formElement;
-            return ( 
-                <FormInputText
-                    name={name}
-                    label={name}
-                    minLength={minLength} 
-                    maxLength={maxLength}
-                    required={required}
-                    defaultValue={defaultValue}
-                    control={control}
-                />
-            )
-        }
-    }
-};
+import Box from '@mui/material/Box';
+import GetFormElement from './FormUtilityComp/GetFormElement';
+import SignUpSubmitDialog from './FormUtilityComp/SignUpSubmitDialog';
 
 const SignUpForm = ({formElements=[]}) => {
-    const { register, handleSubmit, reset, control, setValue } = useForm();
-    
+
+    const [open, setOpen] = useState(false);
+    const { handleSubmit, control, reset } = useForm();
+
+    const onSubmit = (data) => {
+        console.log(data)
+        setOpen(true);
+        reset();
+    }
+
     return (
         <Card sx={{ minWidth: 300, maxWidth: 600, border: '1px solid black', boxShadow: '10px 10px #212725' }} >
             <CardHeader title="Sign Up"/>
             <CardContent>
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     {
                         formElements?.map((FE, key) => <GetFormElement key={key} formElement={FE} control={control} />)
                     }
-                    <Button type="submit" variant="contained" color="primary">
-                        Submit
-                    </Button>
+                    <Box sx={{ marginTop: 4, display: 'flex', justifyContent: 'space-evenly' }}>
+                        <Button type="submit" variant="contained" color="primary">
+                            Submit
+                        </Button>
+                        <Button type="submit" variant="contained" color="error" onClick={reset}>
+                            Reset
+                        </Button>
+                    </Box>
                 </form>
             </CardContent>
+            <SignUpSubmitDialog open={open} setOpen={setOpen}/>
         </Card> 
     );
 }

@@ -26,11 +26,11 @@ export const generateOptions = (listOfValues, type) => {
             });
         }
         case formElemFormats.RADIO: {
-            return listOfValues.map((singleOption, key) => (
+            return listOfValues.map((option, key) => (
                 <FormControlLabel
                     key={key}
                     value={key.toString()}
-                    label={singleOption.label}
+                    label={option.label}
                     control={<Radio />}
                 />
             ));
